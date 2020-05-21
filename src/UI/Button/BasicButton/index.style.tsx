@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native';
 
 export const btnDisabledStyle = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: 'white',
-        borderRadius: 10,
+        backgroundColor: 'rgba(255,255,255,0.5)',
+        borderRadius: 20,
         marginTop: 10,
         marginBottom: 10
     },
     fontColor: {
-        color: 'black',
+        color: 'rgba(0,0,0,0.5)',
         fontSize: 18,
         fontWeight: '700'
     }
@@ -16,34 +16,36 @@ export const btnDisabledStyle = StyleSheet.create({
 
 export const btnBlackStyle = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: '#202020',
-        borderRadius: 10,
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        borderRadius: 20,
         marginTop: 10,
         marginBottom: 10
     },
     fontColor: {
         color: 'white',
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: '700'
     }
 });
 
 export const btnGrayStyle = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: '#7B7B7B',
-        borderRadius: 10,
+        backgroundColor: 'rgba(150,150,150,150.8)',
+        borderRadius: 20,
         marginTop: 10,
         marginBottom: 10
     },
     fontColor: {
         color: 'white',
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: '700'
     }
 });
 
 export const btnRedStyle = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: '#F06767',
-        borderRadius: 10,
+        backgroundColor: 'rgba(200,0,0,0.8)',
+        borderRadius: 20,
         marginTop: 10,
         marginBottom: 10
     },
@@ -56,13 +58,13 @@ export const btnRedStyle = StyleSheet.create({
 
 export const btnBlueStyle = StyleSheet.create({
     backgroundColor: {
-        backgroundColor: '#83E4ED',
-        borderRadius: 10,
+        backgroundColor: 'rgba(21,116,179,0.8)',
+        borderRadius: 20,
         marginTop: 10,
         marginBottom: 10
     },
     fontColor: {
-        color: 'black',
+        color: 'white',
         fontSize: 18,
         fontWeight: '700'
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'native-base';
 import { Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { btnDisabledStyle, btnBlackStyle } from './index.style';
+import { btnDisabledStyle, btnGrayStyle } from './index.style';
 
 interface LargeButtonProps {
     labelButton: string;
@@ -37,7 +37,7 @@ LargeButton.defaultProps = {
     labelButton: 'Button',
     onPress: void 0,
     disabled: false,
-    style: btnBlackStyle
+    style: btnGrayStyle
 };
 
 export default LargeButton;

@@ -1,4 +1,3 @@
-// @ts-ignore
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
@@ -8,6 +7,7 @@ import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import styles from './index.style';
+import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
 
 type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
 
@@ -50,15 +50,20 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     return (
         <Container>
-            <ImageBackground source={require('../../../assets/background.png')} style={globalStyles.backgroundImg}>
+            <ImageBackground source={require('../../../assets/backgroundBlue.png')} style={globalStyles.backgroundImg}>
                 <Content>
                     <ScrollView>
                         <View style={globalStyles.container}>
-                            <Image source={require('../../../assets/logo.png')} style={styles.logo} />
+                            <Image source={require('../../../assets/logoRNM.png')} style={globalStyles.logo} />
+
+                            <Text style={globalStyles.title}>
+                                Iniciar Sesion
+                            </Text>
+
                             <BasicInput
                                 placeholder={"Nombre de usuario"}
-                                value={userData.firstname}
-                                onChangeText={value => setUserData({ ...userData, firstname: value })}
+                                value={userData.username}
+                                onChangeText={value => setUserData({ ...userData, username: value })}
                                 disabled={false}
                                 iconLeft={'user'}
                             />
@@ -71,12 +76,15 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                                 iconRight={formData.passwordIconName}
                                 fnIconRight={switchPasswordHidden}
                             />
-                            <BasicButton disabled={false} labelButton={'Entrar'} onPress={() => navigation.navigate('Home')} />
+                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'ENTRAR'} onPress={() => navigation.navigate('SignupScreen')} />
+
+                            <Image source={require('../../../assets/google.png')} style={styles.google} />
+
                             <Text style={globalStyles.text}>
                                 {'¿No tienes una cuenta? '}
                                 <Text onPress={() => navigation.navigate('SignupScreen')}
-                                       style={globalStyles.underline}>
-                                    {'¡Registrate aqui!'}
+                                      style={globalStyles.textBold}>
+                                    {'Registrate'}
                                 </Text>
                             </Text>
                         </View>

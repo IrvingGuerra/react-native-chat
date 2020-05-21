@@ -1,6 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import Meteor from 'react-native-meteor';
+const SERVER_URL = 'ws://localhost:3000/websocket';
 
 import LoginScreen from './src/screens/Auth/Login/index'
 import SignupScreen from './src/screens/Auth/Signup/index'
@@ -14,7 +16,11 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  return (
+    useEffect(() => {
+        //Meteor.connect(SERVER_URL);
+    }, []);
+
+    return (
       <NavigationContainer>
           <Stack.Navigator
               screenOptions={{
@@ -25,5 +31,5 @@ export default function App() {
               <Stack.Screen name="SignupScreen" component={SignupScreen} />
           </Stack.Navigator>
       </NavigationContainer>
-  );
+    );
 }

@@ -3,28 +3,42 @@ import { StyleSheet } from 'react-native';
 const globalStyles = StyleSheet.create({
     backgroundImg: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+    },
+    logo: {
+        width: '50%',
+        height: 200,
+        resizeMode: 'contain',
+        marginTop: 10,
+        marginBottom: 30
     },
     container:{
-        marginLeft: 20,
-        marginRight: 20,
+        flex: 1,
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        marginLeft: 20,
+        marginRight: 20
     },
     title:{
         color: 'white',
-        fontSize: 35,
-        marginTop: 15,
-        marginBottom: 15,
+        fontFamily: 'Arial',
+        fontSize: 30,
+        marginBottom: 20,
         alignSelf: 'flex-start'
     },
     text:{
+        fontFamily: 'Arial',
         color: 'white',
-        fontSize: 16,
+        marginTop: 20,
+        fontSize: 18
     },
-    underline: {
-        textDecorationLine: 'underline'
+    textUnderline: {
+        textDecorationLine: 'underline',
     },
+    textBold: {
+        fontWeight: 'bold'
+    }
 });
 
 export default globalStyles;

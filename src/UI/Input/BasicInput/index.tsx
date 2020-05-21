@@ -1,22 +1,23 @@
 import React from 'react';
-import { Button, Icon, Input, Item } from 'native-base';
-import { StyleSheet, Text } from 'react-native';
+import { Icon, Input, Item } from 'native-base';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
     itemDefault: {
-        backgroundColor: 'white',
-        borderRadius: 12,
+        backgroundColor: 'transparent',
         marginTop: 5,
         marginBottom: 5,
         paddingRight: 10,
-        paddingLeft: 10
+        paddingLeft: 10,
+        borderBottomWidth: 2
     },
     inputDefault: {
-        color: 'rgba(0,0,0,1)'
+        color: 'rgba(255,255,255,1)'
     },
     iconDefault: {
-        color: 'rgba(0,0,0,1)'
+        color: 'rgba(255,255,255,1)',
+        fontSize: 20
     },
     itemDisabled: {
         backgroundColor: 'white',
@@ -61,7 +62,7 @@ const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
         keyboardType
     } = props;
     return (
-        <Item rounded style={disabled ? styles.itemDisabled : styles.itemDefault}>
+        <Item style={disabled ? styles.itemDisabled : styles.itemDefault}>
             {iconLeft && (
                 <Icon
                     style={disabled ? styles.iconDisabled : styles.iconDefault}
@@ -74,6 +75,7 @@ const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
             <Input
                 style={disabled ? styles.inputDisabled : styles.inputDefault}
                 placeholder={placeholder}
+                placeholderTextColor={'rgba(255,255,255,0.4)'}
                 value={value}
                 onChangeText={onChangeText}
                 disabled={disabled}

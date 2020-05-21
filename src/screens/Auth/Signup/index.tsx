@@ -1,13 +1,12 @@
-// @ts-ignore
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
-import { ImageBackground, ScrollView, Text, View } from 'react-native';
+import {Image, ImageBackground, ScrollView, Text, View} from 'react-native';
 import { RootStackParamList } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
-import styles from './index.style';
+import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
 
 type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
 
@@ -24,6 +23,7 @@ interface FormData {
 
 interface UserData {
     username: string;
+    email: string;
     password: string;
 }
 
@@ -37,7 +37,9 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
 
     const [userData, setUserData] = useState<UserData>({
         username: '',
+        email: '',
         password: ''
+
     });
 
     const switchPasswordHidden = () => {
@@ -50,20 +52,28 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
 
     return (
         <Container>
-            <ImageBackground source={require('../../../assets/background.png')} style={globalStyles.backgroundImg}>
+            <ImageBackground source={require('../../../assets/backgroundBlue.png')} style={globalStyles.backgroundImg}>
                 <Content>
                     <ScrollView>
                         <View style={globalStyles.container}>
+                            <Image source={require('../../../assets/logoRNM.png')} style={globalStyles.logo} />
                             <Text style={globalStyles.title}>
                                 Registro
                             </Text>
-
                             <BasicInput
                                 placeholder={"Nombre de usuario"}
-                                value={userData.firstname}
-                                onChangeText={value => setUserData({ ...userData, firstname: value })}
+                                value={userData.username}
+                                onChangeText={value => setUserData({ ...userData, username: value })}
                                 disabled={false}
                                 iconLeft={'user'}
+                            />
+                            <BasicInput
+                                placeholder={"Correo electronico"}
+                                value={userData.email}
+                                onChangeText={value => setUserData({ ...userData, email: value })}
+                                disabled={false}
+                                iconLeft={'envelope'}
+                                keyboardType={'email-address'}
                             />
                             <BasicInput
                                 placeholder={"Contraseña"}
@@ -74,14 +84,17 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
                                 iconRight={formData.passwordIconName}
                                 fnIconRight={switchPasswordHidden}
                             />
-                            <BasicButton disabled={false} labelButton={'Registrarse'} onPress={() => navigation.navigate('Home')} />
+
+                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'REGISTRARSE'} onPress={() => navigation.navigate('LoginScreen')} />
+
                             <Text style={globalStyles.text}>
                                 {'¿Ya tienes una cuenta? '}
                                 <Text onPress={() => navigation.navigate('LoginScreen')}
-                                      style={globalStyles.underline}>
-                                    {'¡Inicia sesión aqui!'}
+                                      style={globalStyles.textBold}>
+                                    {'Inicia Sesión'}
                                 </Text>
                             </Text>
+
                         </View>
                     </ScrollView>
                 </Content>
