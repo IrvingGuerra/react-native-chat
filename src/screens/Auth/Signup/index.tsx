@@ -7,6 +7,8 @@ import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
+import Meteor from 'react-native-meteor';
+const SERVER_URL = 'ws://localhost:27017/websocket';
 
 type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
 
@@ -22,8 +24,16 @@ interface FormData {
 }
 
 interface UserData {
+    firstName: string;
+    lastName: string;
     username: string;
     email: string;
+    gender: string;
+    birthday: string;
+    phone: {
+        lada: string;
+        number: Number;
+    }
     password: string;
 }
 
@@ -36,8 +46,16 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
     });
 
     const [userData, setUserData] = useState<UserData>({
-        username: '',
-        email: '',
+        firstName: 'Irving',
+        lastName: 'Guerra',
+        username: 'iguerra',
+        email: 'guerravargasirving@gmail.com',
+        gender: 'Male',
+        birthday: '1997-09-19',
+        phone: {
+            lada: '+52',
+            number: 5531044967,
+        },
         password: ''
 
     });
@@ -48,6 +66,18 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
             hidePassword: !hidePassword,
             passwordIconName: hidePassword ? 'eye-slash' : 'eye'
         });
+        Meteor.connect(SERVER_URL);
+    };
+
+    const registerPlayer = () => {
+        if(userData.username != ''){
+            console.log("Registrara");
+            console.log(userData);
+            Meteor.call('playerSignup',  userData , (err, res) => {
+                // Do whatever you want with the response
+                console.log('playerSignup', err, res);
+            });
+        }
     };
 
     return (
@@ -85,7 +115,7 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
                                 fnIconRight={switchPasswordHidden}
                             />
 
-                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'REGISTRARSE'} onPress={() => navigation.navigate('LoginScreen')} />
+                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'REGISTRARSE'} onPress={registerPlayer} />
 
                             <Text style={globalStyles.text}>
                                 {'¿Ya tienes una cuenta? '}
