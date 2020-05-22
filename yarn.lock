@@ -876,7 +876,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.6":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
   integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
@@ -1035,6 +1035,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
+
+"@react-native-community/async-storage@>=1.8.1":
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.10.3.tgz#6974404a903a317f462bd0ac3fafa7c0291679df"
+  integrity sha512-f3G3dX5aoFZZC1G7alnaFmlTpXn8HPfpR8H3Hf7wbbQrQvZmW7mW2fXHv/oj99FNPd228bneL3GOnjGe2Epkww==
+  dependencies:
+    deep-assign "^3.0.0"
 
 "@react-native-community/cli-debugger-ui@^3.0.0":
   version "3.0.0"
@@ -3650,6 +3657,24 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
+meteor-react-native@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/meteor-react-native/-/meteor-react-native-2.0.4.tgz#6337c79e7605702bdd8f2161a9431d99a35392c7"
+  integrity sha512-r2M0Jx2CpO9f2af8pUtmuLImWQrFU7890u/x3fhNvayEI3Das58WDO3MEkzrNnxpRH2qsTgkmQbBPlwO3NbrMA==
+  dependencies:
+    "@babel/runtime" "^7.9.6"
+    base-64 "^0.1.0"
+    crypto-js "^3.1.6"
+    ejson "^2.1.2"
+    minimongo-cache "0.0.48"
+    node-require-fallback "^1.0.0"
+    prop-types "^15.5.10"
+    trackr "^2.0.2"
+    underscore "^1.8.3"
+    wolfy87-eventemitter "^4.3.0"
+  optionalDependencies:
+    "@react-native-community/async-storage" ">=1.8.1"
+
 metro-babel-register@^0.56.0, metro-babel-register@^0.56.4:
   version "0.56.4"
   resolved "https://registry.yarnpkg.com/metro-babel-register/-/metro-babel-register-0.56.4.tgz#b0c627a1cfdd1bdd768f81af79481754e833a902"
@@ -4112,6 +4137,11 @@ node-releases@^1.1.53:
   version "1.1.56"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.56.tgz#bc054a417d316e3adac90eafb7e1932802f28705"
   integrity sha512-EVo605FhWLygH8a64TjgpjyHYOihkxECwX1bHHr8tETJKWEiWS2YJjPbvsX2jFjnjTNEgBCmk9mLjKG1Mf11cw==
+
+node-require-fallback@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-require-fallback/-/node-require-fallback-1.0.0.tgz#0f91384b65c95eb1707d292820ea5b7632a88c6a"
+  integrity sha1-D5E4S2XJXrFwfSkoIOpbdjKojGo=
 
 noop-fn@^1.0.0:
   version "1.0.0"

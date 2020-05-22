@@ -47,8 +47,8 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
     const [userData, setUserData] = useState<UserData>({
         firstName: 'Irving',
         lastName: 'Guerra',
-        username: 'iguerra',
-        email: 'guerravargasirving@gmail.com',
+        username: 'iguerraRN',
+        email: 'guerravargasirvinggo@gmail.com',
         gender: 'Male',
         birthday: '1997-09-19',
         phone: {
