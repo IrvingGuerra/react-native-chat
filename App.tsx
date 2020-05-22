@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './src/screens/Auth/Login/index'
 import SignupScreen from './src/screens/Auth/Signup/index'
 import Meteor from 'react-native-meteor';
-const SERVER_URL = 'ws://localhost:3000/websocket';
+//const SERVER_URL = 'ws://localhost:3000/websocket';
+const SERVER_URL = 'ws://root:root123@104.197.120.114:27017/websocket';
 
 export type RootStackParamList = {
     LoginScreen: React.FunctionComponent;
@@ -17,6 +18,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 export default function App() {
     useEffect(() => {
         Meteor.connect(SERVER_URL);
+        Meteor.ddp.on('connected', () => {
+            console.info('Conection con server stablished.');
+        });
     }, []);
     return (
       <NavigationContainer>

@@ -8,7 +8,6 @@ import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
 import Meteor from 'react-native-meteor';
-const SERVER_URL = 'ws://localhost:27017/websocket';
 
 type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
 
@@ -66,7 +65,6 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
             hidePassword: !hidePassword,
             passwordIconName: hidePassword ? 'eye-slash' : 'eye'
         });
-        Meteor.connect(SERVER_URL);
     };
 
     const registerPlayer = () => {
