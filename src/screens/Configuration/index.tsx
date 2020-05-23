@@ -1,4 +1,5 @@
 import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RouteProp } from '@react-navigation/native';
 import { Container, Icon } from 'native-base';
 import React, { useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
@@ -10,26 +11,28 @@ import BasicInput from '../../UI/Input/BasicInput';
 import styles from './index.style';
 
 type ConfigurationScreenNavigationProps = DrawerNavigationProp<RootStackParamList, 'ConfigurationScreen'>;
+type ConfigurationScreenRouteProp = RouteProp<RootStackParamList, 'ConfigurationScreen'>;
 
 interface ConfigurationScreenProps {
     navigation: ConfigurationScreenNavigationProps;
+    route: ConfigurationScreenRouteProp;
 }
 
 const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = props => {
-    const { navigation } = props;
+    const { route, navigation } = props;
+    const { user } = route.params;
+    const usuario = JSON.parse(user);
 
-    const [range, setRange] = useState([0]);
     const [userData, setUserData] = useState({
-        firstname: 'Irving',
-        lastname: 'Guerra',
-        phone: '5531044967',
-        email: 'iguerra@antware.mx',
-        range: 10
+        firstname: usuario.profile.firstName,
+        lastname: usuario.profile.lastName,
+        phone: usuario.profile.phone.number.toString(),
+        email: usuario.emails[0].address,
     });
+
     const [disabled, setDisabled] = useState({
         firstname: true,
         lastname: true,
-        range: true
     });
 
     return (
@@ -59,16 +62,6 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
                 <BasicInput value={userData.phone} disabled={true} />
 
                 <BasicInput value={userData.email} disabled={true} />
-
-                <View style={styles.rangeInput}>
-                    <View style={styles.rangeInfo}>
-                        <Icon style={styles.icon} type="FontAwesome" name="info-circle" />
-                    </View>
-                    <View style={styles.rangeText}>
-                        <Text style={styles.textTitle}>Radio de búsqueda</Text>
-                        <Text style={styles.textValue}>{userData.range} km</Text>
-                    </View>
-                </View>
 
                 <BasicButton style={btnGrayStyle} labelButton={'Guardar'} onPress={() => null} />
                 <BasicButton style={btnRedStyle} labelButton={'Eliminar Cuenta'} onPress={() => null} />

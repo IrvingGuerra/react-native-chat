@@ -12,8 +12,8 @@ const SERVER_URL = 'ws://localhost:3000/websocket';
 export type RootStackParamList = {
     LoginScreen: React.FunctionComponent;
     SignupScreen: React.FunctionComponent;
-    HomeScreen: React.FunctionComponent;
-    ConfigurationScreen: React.FunctionComponent;
+    HomeScreen: { user: string};
+    ConfigurationScreen: { user: string};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
