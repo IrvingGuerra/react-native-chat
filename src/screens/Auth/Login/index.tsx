@@ -1,13 +1,14 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
-import { Image, ImageBackground, ScrollView, Text, View } from 'react-native';
+import { Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
 import { RootStackParamList } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import styles from './index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
+import CryptoJS from "react-native-crypto-js";
 
 type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
 
@@ -48,6 +49,30 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
         });
     };
 
+    const normalLogin = () => {
+        fetch('http://localhost:3000/api/player/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userData.username,
+                password: CryptoJS.AES.encrypt(userData.password, "Versus team, the best developers").toString()
+            })
+        }).then((responseMessage) => {
+            const r = JSON.parse(JSON.stringify(responseMessage));
+            console.log(r.status)
+            if(r.status === 400){
+                Alert.alert("Error", "El usuario no existe");
+            }else if(r.status === 500){
+                Alert.alert("Error", "Contraseña incorrecta");
+            }else if(r.status === 201){
+                Alert.alert("Error", "Perfecto");
+            }
+        });
+    }
+
     return (
         <Container>
             <ImageBackground source={require('../../../assets/backgroundBlue.png')} style={globalStyles.backgroundImg}>
@@ -76,7 +101,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                                 iconRight={formData.passwordIconName}
                                 fnIconRight={switchPasswordHidden}
                             />
-                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'ENTRAR'} onPress={() => navigation.navigate('SignupScreen')} />
+                            <BasicButton style={btnRedStyle} disabled={false} labelButton={'ENTRAR'} onPress={normalLogin} />
 
                             <Image source={require('../../../assets/google.png')} style={styles.google} />
 

@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
-import {Image, ImageBackground, ScrollView, Text, View} from 'react-native';
+import {Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
 import { RootStackParamList } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
@@ -48,7 +48,7 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
         firstName: 'Irving',
         lastName: 'Guerra',
         username: 'iguerraRN',
-        email: 'guerravargasirvinggo@gmail.com',
+        email: 'guerravargasirvin@gmail.com',
         gender: 'Male',
         birthday: '1997-09-19',
         phone: {
@@ -72,8 +72,12 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
             console.log("Registrara");
             console.log(userData);
             Meteor.call('playerSignup',  userData , (err, res) => {
-                // Do whatever you want with the response
                 console.log('playerSignup', err, res);
+                if(err){
+                    console.log("Error creando usuario", err)
+                }else{
+                    Alert.alert('Felicidades','Usuario creado con exito');
+                }
             });
         }
     };
@@ -89,6 +93,20 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
                                 Registro
                             </Text>
                             <BasicInput
+                                placeholder={"Nombre"}
+                                value={userData.firstName}
+                                onChangeText={value => setUserData({ ...userData, firstName: value })}
+                                disabled={false}
+                                iconLeft={'user'}
+                            />
+                            <BasicInput
+                                placeholder={"Apellido"}
+                                value={userData.lastName}
+                                onChangeText={value => setUserData({ ...userData, lastName: value })}
+                                disabled={false}
+                                iconLeft={'user'}
+                            />
+                            <BasicInput
                                 placeholder={"Nombre de usuario"}
                                 value={userData.username}
                                 onChangeText={value => setUserData({ ...userData, username: value })}
@@ -102,6 +120,35 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
                                 disabled={false}
                                 iconLeft={'envelope'}
                                 keyboardType={'email-address'}
+                            />
+                            <BasicInput
+                                placeholder={"Genero"}
+                                value={userData.gender}
+                                onChangeText={value => setUserData({ ...userData, gender: value })}
+                                disabled={false}
+                                iconLeft={'venus-mars'}
+                            />
+                            <BasicInput
+                                placeholder={"Cumpleaños"}
+                                value={userData.birthday}
+                                onChangeText={value => setUserData({ ...userData, birthday: value })}
+                                disabled={false}
+                                iconLeft={'calendar'}
+                            />
+                            <BasicInput
+                                placeholder={"Lada"}
+                                value={userData.phone.lada}
+                                onChangeText={value => setUserData({ ...userData, phone: { ...userData.phone, lada: value }})}
+                                disabled={false}
+                                iconLeft={'calendar'}
+                            />
+                            <BasicInput
+                                placeholder={"Telefono"}
+                                value={userData.phone.number.toString()}
+                                onChangeText={value => setUserData({ ...userData, phone: { ...userData.phone, number: parseInt(value) }})}
+                                disabled={false}
+                                iconLeft={'calendar'}
+                                keyboardType={"number-pad"}
                             />
                             <BasicInput
                                 placeholder={"Contraseña"}
