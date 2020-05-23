@@ -62,16 +62,18 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
             })
         }).then((responseMessage) => {
             const r = JSON.parse(JSON.stringify(responseMessage));
-            console.log(r.status)
+            const usr = r.headers.map.user;
             if(r.status === 400){
                 Alert.alert("Error", "El usuario no existe");
             }else if(r.status === 500){
                 Alert.alert("Error", "Contraseña incorrecta");
             }else if(r.status === 201){
-                Alert.alert("Error", "Perfecto");
+                navigation.navigate('HomeScreen', {
+                    user: usr
+                });
             }
         });
-    }
+    };
 
     return (
         <Container>
