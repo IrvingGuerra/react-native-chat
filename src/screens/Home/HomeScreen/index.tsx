@@ -5,7 +5,8 @@ import { Icon } from 'native-base';
 import * as React from 'react';
 import { RootStackParamList } from '../../../../App';
 import BannerProfile from '../../../UI/Banner/Profile/index';
-import ConfigurationScreen from '../../Configuration/index';
+import ConfigurationScreen from '../Configuration/index';
+import PlayersScreen from '../Players/index';
 import styles from './index.style';
 
 type HomeScreenNavigationProps = StackNavigationProp<RootStackParamList>;
@@ -42,14 +43,19 @@ const createSlideMenu = (props: any) => {
 const Drawer = createDrawerNavigator();
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
-    const { user } = props.route.params;
+    //const { user } = props.route.params;
     return (
         <Drawer.Navigator drawerStyle={{ width: '90%' }} drawerContent={(data: any) => createSlideMenu(data)}>
             <Drawer.Screen
                 options={{ drawerIcon: () => <Icon name="cog" {...props} /> }}
                 name="Configuración"
                 component={ConfigurationScreen}
-                initialParams={{user: user}}
+                //initialParams={{user: user}}
+            />
+            <Drawer.Screen
+                options={{ drawerIcon: () => <Icon name="person" {...props} /> }}
+                name="Players"
+                component={PlayersScreen}
             />
         </Drawer.Navigator>
     );

@@ -50,6 +50,8 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
     };
 
     const normalLogin = () => {
+        navigation.navigate('HomeScreen');
+        /*
         fetch('http://localhost:3000/api/player/login', {
             method: 'POST',
             headers: {
@@ -73,6 +75,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
                 });
             }
         });
+         */
     };
 
     return (

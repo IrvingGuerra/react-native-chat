@@ -3,11 +3,11 @@ import { RouteProp } from '@react-navigation/native';
 import { Container, Icon } from 'native-base';
 import React, { useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
-import { RootStackParamList } from '../../../App';
-import BasicButton from '../../UI/Button/BasicButton';
-import { btnGrayStyle, btnRedStyle } from '../../UI/Button/BasicButton/index.style';
-import BasicHeader from '../../UI/Header/BasicHeader';
-import BasicInput from '../../UI/Input/BasicInput';
+import { RootStackParamList } from '../../../../App';
+import BasicButton from '../../../UI/Button/BasicButton';
+import { btnGrayStyle, btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
+import BasicHeader from '../../../UI/Header/BasicHeader';
+import BasicInput from '../../../UI/Input/BasicInput';
 import styles from './index.style';
 
 type ConfigurationScreenNavigationProps = DrawerNavigationProp<RootStackParamList, 'ConfigurationScreen'>;
@@ -20,14 +20,23 @@ interface ConfigurationScreenProps {
 
 const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = props => {
     const { route, navigation } = props;
-    const { user } = route.params;
-    const usuario = JSON.parse(user);
+    //const { user } = route.params;
+    //const usuario = JSON.parse(user);
 
+    /*
     const [userData, setUserData] = useState({
         firstname: usuario.profile.firstName,
         lastname: usuario.profile.lastName,
         phone: usuario.profile.phone.number.toString(),
         email: usuario.emails[0].address,
+    });
+     */
+
+    const [userData, setUserData] = useState({
+        firstname: 'Irving',
+        lastname: 'Guerra',
+        phone: '5531044967',
+        email: 'iguerrav@gmail.com',
     });
 
     const [disabled, setDisabled] = useState({
@@ -40,7 +49,7 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
             <ScrollView>
                 <BasicHeader icon={'menu'} onPress={() => navigation.openDrawer()} titleHeader={'Configuración'} />
                 <View style={styles.containerCenter}>
-                    <Image style={styles.photo} source={require('../../assets/userPhoto.png')} />
+                    <Image style={styles.photo} source={require('../../../assets/userPhoto.png')} />
                 </View>
 
                 <BasicInput
