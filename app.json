@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Aplicación en reac native para chatear entre usuarios.",
+    "githubUrl": "https://github.com/IrvingGuerra/react-native-chat"
   }
 }

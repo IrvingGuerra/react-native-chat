@@ -22,13 +22,11 @@ const globalStyles = StyleSheet.create({
     },
     title:{
         color: 'white',
-        fontFamily: 'Arial',
         fontSize: 30,
         marginBottom: 20,
         alignSelf: 'flex-start'
     },
     text:{
-        fontFamily: 'Arial',
         color: 'white',
         marginTop: 20,
         fontSize: 18
