@@ -80,7 +80,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     return (
         <Container>
-            <ImageBackground source={require('../../../assets/backgroundBlue.png')} style={globalStyles.backgroundImg}>
+            <ImageBackground source={require('../../../assets/bg.png')} style={globalStyles.backgroundImg}>
                 <Content>
                     <ScrollView>
                         <View style={globalStyles.container}>
