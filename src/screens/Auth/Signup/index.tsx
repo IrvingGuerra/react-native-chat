@@ -2,12 +2,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
 import {Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
-import { RootStackParamList } from '../../../../App';
+import { RootStackParamList, SELECTED_SERVER } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
-import Meteor from 'react-native-meteor';
 
 type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
 
@@ -55,7 +54,7 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
             lada: '+52',
             number: 5531044967,
         },
-        password: ''
+        password: '123'
 
     });
 
@@ -67,19 +66,24 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
         });
     };
 
-    const registerPlayer = () => {
-        if(userData.username != ''){
-            console.log("Registrara");
-            console.log(userData);
-            Meteor.call('playerSignup',  userData , (err, res) => {
-                console.log('playerSignup', err, res);
-                if(err){
-                    console.log("Error creando usuario", err)
-                }else{
-                    Alert.alert('Felicidades','Usuario creado con exito');
-                }
-            });
+    const registerPlayer = async () => {
+        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/register', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
+            },
+            body: JSON.stringify(userData)
+        });
+        let data = await response.json();
+        if(data.statusCode === 201){
+            Alert.alert("Register", data.body.message);
+        }else{
+            // Error
+            Alert.alert("Error", data.body.message);
         }
+
     };
 
     return (

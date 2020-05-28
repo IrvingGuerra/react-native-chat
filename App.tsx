@@ -7,10 +7,12 @@ import HomeScreen from './src/screens/Home/HomeScreen/index';
 import ConfigurationScreen from "./src/screens/Home/Configuration";
 import ChatScreen from "./src/screens/Home/Chat";
 import PlayersScreen from "./src/screens/Home/Players";
-//import Meteor from 'meteor-react-native';
 import Meteor from 'react-native-meteor';
-const SERVER_URL = 'ws://localhost:3000/websocket';
-//const SERVER_URL = 'ws://35.222.16.63:27017/websocket';
+
+const INTERNAL_SERVER = 'localhost:3000';
+const EXTERNAL_SERVER = '34.69.61.17:80';
+export const SELECTED_SERVER = INTERNAL_SERVER;
+const METEOR_URL = 'ws://'+SELECTED_SERVER+'/websocket';
 
 export type RootStackParamList = {
     LoginScreen: React.FunctionComponent;
@@ -25,7 +27,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
     useEffect(() => {
-        //Meteor.connect(SERVER_URL);
+        Meteor.connect(METEOR_URL);
     }, []);
     return (
       <NavigationContainer>
@@ -41,7 +43,6 @@ export default function App() {
               <Stack.Screen name="ConfigurationScreen" component={ConfigurationScreen} />
               <Stack.Screen name="PlayersScreen" component={PlayersScreen} />
               <Stack.Screen name="ChatScreen" component={ChatScreen} />
-
           </Stack.Navigator>
       </NavigationContainer>
     );

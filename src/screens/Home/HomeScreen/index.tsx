@@ -43,14 +43,14 @@ const createSlideMenu = (props: any) => {
 const Drawer = createDrawerNavigator();
 
 const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
-    //const { user } = props.route.params;
+    const { user } = props.route.params;
     return (
         <Drawer.Navigator drawerStyle={{ width: '90%' }} drawerContent={(data: any) => createSlideMenu(data)}>
             <Drawer.Screen
                 options={{ drawerIcon: () => <Icon name="cog" {...props} /> }}
                 name="Configuración"
                 component={ConfigurationScreen}
-                //initialParams={{user: user}}
+                initialParams={{ user: user }}
             />
             <Drawer.Screen
                 options={{ drawerIcon: () => <Icon name="person" {...props} /> }}

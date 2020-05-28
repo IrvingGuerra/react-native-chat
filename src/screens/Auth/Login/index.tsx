@@ -2,13 +2,12 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
 import { Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
-import { RootStackParamList } from '../../../../App';
+import {RootStackParamList, SELECTED_SERVER} from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import styles from './index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
-import CryptoJS from "react-native-crypto-js";
 
 type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
 
@@ -37,8 +36,8 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
     });
 
     const [userData, setUserData] = useState<UserData>({
-        username: '',
-        password: ''
+        username: 'iguerra',
+        password: '123'
     });
 
     const switchPasswordHidden = () => {
@@ -49,33 +48,28 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
         });
     };
 
-    const normalLogin = () => {
-        navigation.navigate('HomeScreen');
-        /*
-        fetch('http://localhost:3000/api/player/login', {
+    const normalLogin = async () => {
+
+        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/login', {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
             },
-            body: JSON.stringify({
-                username: userData.username,
-                password: CryptoJS.AES.encrypt(userData.password, "Versus team, the best developers").toString()
-            })
-        }).then((responseMessage) => {
-            const r = JSON.parse(JSON.stringify(responseMessage));
-            const usr = r.headers.map.user;
-            if(r.status === 400){
-                Alert.alert("Error", "El usuario no existe");
-            }else if(r.status === 500){
-                Alert.alert("Error", "Contraseña incorrecta");
-            }else if(r.status === 201){
-                navigation.navigate('HomeScreen', {
-                    user: usr
-                });
-            }
+            body: JSON.stringify(userData)
         });
-         */
+        let data = await response.json();
+        if(data.statusCode === 201){
+            Alert.alert("Login successful", data.body.message);
+            navigation.navigate('HomeScreen', {
+                user: data.body.user
+            });
+        }else{
+            // Error
+            Alert.alert("Error", data.body.message);
+        }
+
     };
 
     return (

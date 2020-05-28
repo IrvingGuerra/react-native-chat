@@ -7,13 +7,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         height: '100%',
-        paddingHorizontal: 15
+        width: '100%'
     },
-    mainBody: {
-        flex: 6
-    },
-    scrollView: {
-        marginBottom: 20
+    online:{
+        color: 'green',
     }
 });
 
