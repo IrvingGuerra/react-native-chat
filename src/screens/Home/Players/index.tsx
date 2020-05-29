@@ -49,10 +49,10 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
             <View style={styles.body}>
                 <ScrollView>
                     <List>
-                        {_.map(players, (player) => {
+                        {_.map(players, (player, key) => {
                             if(player.status.online){
                                 return(
-                                    <ListItem thumbnail onPress={() => navigation.navigate('ChatScreen')}>
+                                    <ListItem key={key} thumbnail onPress={() => navigation.navigate('ChatScreen')}>
                                         <Left>
                                             <Thumbnail small source={profilePic} />
                                         </Left>
@@ -71,7 +71,7 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
                                 );
                             }else{
                                 return(
-                                    <ListItem thumbnail onPress={() => navigation.navigate('ChatScreen')}>
+                                    <ListItem key={key} thumbnail onPress={() => navigation.navigate('ChatScreen')}>
                                         <Left>
                                             <Thumbnail small source={profilePic} />
                                         </Left>

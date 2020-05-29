@@ -1,39 +1,7 @@
 import React from 'react';
 import { Icon, Input, Item } from 'native-base';
-import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-
-const styles = StyleSheet.create({
-    itemDefault: {
-        backgroundColor: 'transparent',
-        marginTop: 5,
-        marginBottom: 5,
-        paddingRight: 10,
-        paddingLeft: 10,
-        borderBottomWidth: 2
-    },
-    inputDefault: {
-        color: 'rgba(255,255,255,1)'
-    },
-    iconDefault: {
-        color: 'rgba(255,255,255,1)',
-        fontSize: 20
-    },
-    itemDisabled: {
-        backgroundColor: 'white',
-        borderRadius: 12,
-        marginTop: 5,
-        marginBottom: 5,
-        paddingRight: 10,
-        paddingLeft: 10
-    },
-    inputDisabled: {
-        color: 'rgba(0,0,0,0.4)'
-    },
-    iconDisabled: {
-        color: 'rgba(0,0,0,0.4)'
-    }
-});
+import { inputDisabledStyle, inputWhiteStyle } from './index.style';
 
 interface BasicInputProps {
     placeholder?: string;
@@ -46,6 +14,7 @@ interface BasicInputProps {
     disabled?: boolean;
     security?: boolean;
     keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'numeric' | 'email-address' | 'phone-pad';
+    style?: any;
 }
 
 const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
@@ -59,13 +28,14 @@ const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
         fnIconRight,
         disabled,
         security,
-        keyboardType
+        keyboardType,
+        style
     } = props;
     return (
-        <Item style={disabled ? styles.itemDisabled : styles.itemDefault}>
+        <Item style={disabled ? inputDisabledStyle.item : style.item}>
             {iconLeft && (
                 <Icon
-                    style={disabled ? styles.iconDisabled : styles.iconDefault}
+                    style={disabled ? inputDisabledStyle.icon : style.icon}
                     onPress={fnIconLeft}
                     active
                     type="FontAwesome"
@@ -73,7 +43,7 @@ const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
                 />
             )}
             <Input
-                style={disabled ? styles.inputDisabled : styles.inputDefault}
+                style={disabled ? inputDisabledStyle.input : style.input}
                 placeholder={placeholder}
                 placeholderTextColor={'rgba(255,255,255,0.4)'}
                 value={value}
@@ -84,7 +54,7 @@ const BasicInput: React.FunctionComponent<BasicInputProps> = props => {
             />
             {iconRight && (
                 <Icon
-                    style={disabled ? styles.iconDisabled : styles.iconDefault}
+                    style={disabled ? inputDisabledStyle.icon : style.icon}
                     onPress={fnIconRight}
                     active
                     type="FontAwesome"
@@ -105,7 +75,8 @@ BasicInput.propTypes = {
     fnIconRight: PropTypes.func,
     disabled: PropTypes.bool,
     security: PropTypes.bool,
-    keyboardType: PropTypes.any
+    keyboardType: PropTypes.any,
+    style: PropTypes.any
 };
 
 BasicInput.defaultProps = {
@@ -118,7 +89,8 @@ BasicInput.defaultProps = {
     fnIconRight: () => {},
     disabled: false,
     security: false,
-    keyboardType: 'default'
+    keyboardType: 'default',
+    style: inputWhiteStyle
 };
 
 export default BasicInput;
