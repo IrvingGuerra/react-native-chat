@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
 import { Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
-import {RootStackParamList, SELECTED_SERVER} from '../../../../App';
+import {RootStackParamList} from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
@@ -14,7 +14,6 @@ type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'Login
 interface LoginScreenProps {
     navigation: LoginScreenNavigationProps;
 }
-
 export type passwordIconName = 'eye' | 'eye-slash';
 
 interface FormData {
@@ -50,7 +49,7 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     const normalLogin = async () => {
 
-        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/login', {
+        let response = await fetch('http://localhost:3000/api/player/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -56,6 +56,7 @@ const HomeScreen: React.FunctionComponent<HomeScreenProps> = props => {
                 options={{ drawerIcon: () => <Icon name="person" {...props} /> }}
                 name="Players"
                 component={PlayersScreen}
+                initialParams={{ user: user }}
             />
         </Drawer.Navigator>
     );

@@ -3,7 +3,7 @@ import { RouteProp } from '@react-navigation/native';
 import { Container, Icon } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import {Alert, Image, ScrollView, Text, View} from 'react-native';
-import {RootStackParamList, SELECTED_SERVER} from '../../../../App';
+import {RootStackParamList} from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import { btnGrayStyle, btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
 import { inputBlackStyle } from '../../../UI/Input/BasicInput/index.style';
@@ -46,7 +46,7 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
     });
 
     const updatePlayer = async () => {
-        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/updatePlayerData', {
+        let response = await fetch('http://localhost:3000/api/player/updatePlayerData', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -85,7 +85,7 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
     };
 
     const removeAccount = async () => {
-        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/removePlayer', {
+        let response = await fetch('http://localhost:3000/api/player/removePlayer', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

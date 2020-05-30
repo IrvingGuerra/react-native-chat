@@ -2,24 +2,25 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
         height: '100%',
-        paddingHorizontal: 15
+        width: '100%'
     },
-    mainBody: {
-        flex: 6
+    header:{
+        height: '10%'
     },
-    scrollView: {
-        marginBottom: 20
+    chat:{
+        height: '75%',
     },
-    bottom: {
-        flex: 1,
+    msn: {
+        height: '15%',
         justifyContent: 'flex-end',
-        marginBottom: 36
+        paddingBottom: 15
     }
+
 });
 
 export default styles;

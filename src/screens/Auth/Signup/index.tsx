@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import {Container, Content} from 'native-base';
 import React, { useState } from 'react';
 import {Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
-import { RootStackParamList, SELECTED_SERVER } from '../../../../App';
+import { RootStackParamList } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
@@ -67,7 +67,7 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
     };
 
     const registerPlayer = async () => {
-        let response = await fetch('http://'+SELECTED_SERVER+'/api/player/register', {
+        let response = await fetch('http://localhost:3000/api/player/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
