@@ -4,9 +4,13 @@ import React, { useState } from 'react';
 import {Image, ImageBackground, ScrollView, Text, View, Alert} from 'react-native';
 import { RootStackParamList } from '../../../../App';
 import BasicButton from '../../../UI/Button/BasicButton';
+import BasicDatePicker from '../../../UI/Input/BasicDatePicker';
 import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
+import { SERVER, PORT, API_HEADERS } from "../../../constants";
+import RadioForm from 'react-native-simple-radio-button';
+import styles from './index.style';
 
 type SignupScreenNavigationProps = StackNavigationProp<RootStackParamList, 'SignupScreen'>;
 
@@ -27,10 +31,10 @@ interface UserData {
     username: string;
     email: string;
     gender: string;
-    birthday: string;
+    birthday: Date;
     phone: {
         lada: string;
-        number: Number;
+        number: string;
     }
     password: string;
 }
@@ -44,17 +48,17 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
     });
 
     const [userData, setUserData] = useState<UserData>({
-        firstName: 'Irving',
-        lastName: 'Guerra',
-        username: 'iguerraRN',
-        email: 'guerravargasirvin@gmail.com',
-        gender: 'Male',
-        birthday: '1997-09-19',
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        gender: 'M',
+        birthday: new Date(),
         phone: {
             lada: '+52',
-            number: 5531044967,
+            number: '',
         },
-        password: '123'
+        password: ''
 
     });
 
@@ -67,23 +71,28 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
     };
 
     const registerPlayer = async () => {
-        let response = await fetch('http://localhost:3000/api/player/register', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache'
-            },
-            body: JSON.stringify(userData)
-        });
-        let data = await response.json();
-        if(data.statusCode === 201){
-            Alert.alert("Register", data.body.message);
+        if(userData.firstName!=''
+            && userData.lastName!=''
+            && userData.username!=''
+            && userData.email!=''
+            && userData.phone.lada!=''
+            && userData.phone.number!=''
+            && userData.password!=''){
+            let response = await fetch('http://'+SERVER+':'+PORT+'/api/player/register', {
+                method: 'POST',
+                headers: API_HEADERS,
+                body: JSON.stringify(userData)
+            });
+            let data = await response.json();
+            if(data.statusCode === 201){
+                Alert.alert("Register", data.body.message);
+            }else{
+                // Error
+                Alert.alert("Error", data.body.message);
+            }
         }else{
-            // Error
-            Alert.alert("Error", data.body.message);
+            Alert.alert("Error", "Please verify that the fields are not empty.");
         }
-
     };
 
     return (
@@ -125,33 +134,51 @@ const SignupScreen: React.FunctionComponent<SignupScreenProps> = props => {
                                 iconLeft={'envelope'}
                                 keyboardType={'email-address'}
                             />
-                            <BasicInput
-                                placeholder={"Genero"}
-                                value={userData.gender}
-                                onChangeText={value => setUserData({ ...userData, gender: value })}
-                                disabled={false}
-                                iconLeft={'venus-mars'}
+
+                            <Text style={[globalStyles.text, globalStyles.textAlignLeft]}>
+                                {'Gender'}
+                            </Text>
+
+                            <RadioForm
+                                radio_props={[
+                                    { label: 'Male', value: 'M' },
+                                    { label: 'Female', value: 'F' }
+                                ]}
+                                initial={ userData.gender === 'M' && 0 }
+                                labelColor={'rgba(255,255,255,0.4)'}
+                                buttonColor={'rgba(255,255,255,0.4)'}
+                                selectedLabelColor={'white'}
+                                selectedButtonColor={'white'}
+                                formHorizontal={true}
+                                labelHorizontal={true}
+                                animation={true}
+                                onPress={(value: string) => setUserData({ ...userData, gender: value })}
+                                style={styles.radioButton}
+                                labelStyle={styles.labelRadio}
                             />
-                            <BasicInput
-                                placeholder={"Cumpleaños"}
+
+                            <Text style={[globalStyles.text, globalStyles.textAlignLeft]}>
+                                {'Birthday'}
+                            </Text>
+
+                            <BasicDatePicker
                                 value={userData.birthday}
-                                onChangeText={value => setUserData({ ...userData, birthday: value })}
-                                disabled={false}
-                                iconLeft={'calendar'}
+                                onChangeDate={value => setUserData({ ...userData, birthday: value })}
                             />
+
                             <BasicInput
                                 placeholder={"Lada"}
                                 value={userData.phone.lada}
                                 onChangeText={value => setUserData({ ...userData, phone: { ...userData.phone, lada: value }})}
                                 disabled={false}
-                                iconLeft={'calendar'}
+                                iconLeft={'phone-square'}
                             />
                             <BasicInput
                                 placeholder={"Telefono"}
-                                value={userData.phone.number.toString()}
-                                onChangeText={value => setUserData({ ...userData, phone: { ...userData.phone, number: parseInt(value) }})}
+                                value={userData.phone.number}
+                                onChangeText={value => setUserData({ ...userData, phone: { ...userData.phone, number: value }})}
                                 disabled={false}
-                                iconLeft={'calendar'}
+                                iconLeft={'phone'}
                                 keyboardType={"number-pad"}
                             />
                             <BasicInput

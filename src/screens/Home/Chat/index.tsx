@@ -77,7 +77,7 @@ const ChatScreen: React.FunctionComponent<ChatScreenProps> = props => {
                                 <Thumbnail small source={profilePic} />
                             </Left>
                             <Body>
-                                <Text>Irving Guerra</Text>
+                                <Text>{JSON.parse(userB).username}</Text>
                                 <Text note>Ultima conexion: 3:20 pm</Text>
                             </Body>
                         </ListItem>

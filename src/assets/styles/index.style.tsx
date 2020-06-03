@@ -37,6 +37,9 @@ const globalStyles = StyleSheet.create({
     },
     textBold: {
         fontWeight: 'bold'
+    },
+    textAlignLeft:{
+        alignSelf: 'flex-start'
     }
 });
 

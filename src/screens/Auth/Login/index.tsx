@@ -8,6 +8,7 @@ import BasicInput from '../../../UI/Input/BasicInput';
 import globalStyles from '../../../../src/assets/styles/index.style';
 import styles from './index.style';
 import { btnRedStyle } from '../../../UI/Button/BasicButton/index.style';
+import { SERVER, PORT, API_HEADERS } from "../../../constants";
 
 type LoginScreenNavigationProps = StackNavigationProp<RootStackParamList, 'LoginScreen'>;
 
@@ -49,13 +50,9 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
 
     const normalLogin = async () => {
 
-        let response = await fetch('http://localhost:3000/api/player/login', {
+        let response = await fetch('http://'+SERVER+':'+PORT+'/api/player/login', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache'
-            },
+            headers: API_HEADERS,
             body: JSON.stringify(userData)
         });
         let data = await response.json();

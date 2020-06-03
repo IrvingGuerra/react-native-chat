@@ -1,22 +1,14 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    textLine: {
-        color: 'white',
-        textAlign: 'center',
-        margin: 15
+    radioButton: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
     },
-    textLineUnderline: {
-        color: 'white',
-        textAlign: 'center',
-        textDecorationLine: 'underline',
-        margin: 15
-    },
-    button: {
-        borderRadius: 20,
-        marginTop: 10,
-        marginLeft: '15%',
-        marginRight: '15%'
+    labelRadio: {
+        paddingRight: 20
     }
 });
 

@@ -25,7 +25,7 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
 
     useEffect(() => {
         const getPlayers = async () => {
-            let response = await fetch('http://localhost:3000/api/player/getPlayers', {
+            let response = await fetch('http://35.222.104.227:80/api/player/getPlayers', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',

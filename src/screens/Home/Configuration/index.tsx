@@ -12,6 +12,8 @@ import BasicInput from '../../../UI/Input/BasicInput';
 import styles from './index.style';
 import globalStyles from "../../../assets/styles/index.style";
 
+import { SERVER, PORT, API_HEADERS} from "../../../constants";
+
 type ConfigurationScreenNavigationProps = DrawerNavigationProp<RootStackParamList, 'ConfigurationScreen'>;
 type ConfigurationScreenRouteProp = RouteProp<RootStackParamList, 'ConfigurationScreen'>;
 
@@ -46,13 +48,9 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
     });
 
     const updatePlayer = async () => {
-        let response = await fetch('http://localhost:3000/api/player/updatePlayerData', {
+        let response = await fetch('http://'+SERVER+':'+PORT+'/api/player/updatePlayerData', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache'
-            },
+            headers: API_HEADERS,
             body: JSON.stringify(userData)
         });
         let data = await response.json();
@@ -85,13 +83,9 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
     };
 
     const removeAccount = async () => {
-        let response = await fetch('http://localhost:3000/api/player/removePlayer', {
+        let response = await fetch('http://'+SERVER+':'+PORT+'/api/player/removePlayer', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Cache-Control': 'no-cache'
-            },
+            headers: API_HEADERS,
             body: JSON.stringify({idUser: userData.idUser})
         });
         let data = await response.json();

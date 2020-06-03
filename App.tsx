@@ -8,8 +8,9 @@ import ConfigurationScreen from "./src/screens/Home/Configuration";
 import ChatScreen from "./src/screens/Home/Chat";
 import PlayersScreen from "./src/screens/Home/Players";
 import Meteor from 'react-native-meteor';
+import { SERVER, PORT } from "./src/constants";
 
-const METEOR_URL = 'ws://localhost:3000/websocket';
+const METEOR_URL = 'ws://'+SERVER+':'+PORT+'/websocket';
 
 export type RootStackParamList = {
     LoginScreen: React.FunctionComponent;
