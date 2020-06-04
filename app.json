@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "react-native-chat",
+    "slug": "react-native-chat",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "src/assets/icon.png",
+    "splash": {
+      "image": "src/assets/splashBlue.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "description": "Aplicación en reac native para chatear entre usuarios.",
+    "githubUrl": "https://github.com/IrvingGuerra/react-native-chat"
+  }
+}
