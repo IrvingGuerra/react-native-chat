@@ -9,12 +9,12 @@ interface BubbleProps {
     text: string;
 }
 
-export const Recieve: React.FunctionComponent<BubbleProps> = props => {
+export const BubbleReceived: React.FunctionComponent<BubbleProps> = props => {
     const { text } = props;
     return (
         <View style={[styles.item, styles.itemIn]}>
             <View style={[styles.balloon, {backgroundColor: 'grey'}]}>
-                <Text style={{paddingTop: 5, color: 'white'}}>{ text }</Text>
+                <Text style={styles.text}>{ text }</Text>
                 <View
                     style={[
                         styles.arrowContainer,
@@ -35,12 +35,12 @@ export const Recieve: React.FunctionComponent<BubbleProps> = props => {
     );
 };
 
-export const Send: React.FunctionComponent<BubbleProps> = props => {
+export const BubbleSent: React.FunctionComponent<BubbleProps> = props => {
     const { text } = props;
     return (
         <View style={[styles.item, styles.itemOut]}>
             <View style={[styles.balloon, {backgroundColor: '#1084ff'}]}>
-                <Text style={{paddingTop: 5, color: 'white'}}>{ text }</Text>
+                <Text style={styles.text}>{ text }</Text>
                 <View
                     style={[
                         styles.arrowContainer,

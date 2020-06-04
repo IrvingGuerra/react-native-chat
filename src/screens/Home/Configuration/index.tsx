@@ -29,21 +29,15 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
 
     const [userData, setUserData] = useState({
         idUser: usuario._id,
-        firstname: usuario.profile.firstName,
-        lastname: usuario.profile.lastName,
+        firstName: usuario.profile.firstName,
+        lastName: usuario.profile.lastName,
         username: usuario.username,
-        email: usuario.emails[0].address,
-        gender: usuario.profile.gender,
-        birthday: usuario.profile.birthday,
-        phone: {
-            lada: usuario.profile.phone.lada,
-            number: usuario.profile.phone.number,
-        }
+        email: usuario.emails[0].address
     });
 
     const [disabled, setDisabled] = useState({
-        firstname: true,
-        lastname: true,
+        firstName: true,
+        lastName: true,
         username: true,
     });
 
@@ -107,20 +101,20 @@ const ConfigurationScreen: React.FunctionComponent<ConfigurationScreenProps> = p
                     </View>
 
                     <BasicInput
-                        value={userData.firstname}
-                        onChangeText={value => setUserData({ ...userData, firstname: value })}
-                        disabled={disabled.firstname}
+                        value={userData.firstName}
+                        onChangeText={value => setUserData({ ...userData, firstName: value })}
+                        disabled={disabled.firstName}
                         iconRight={'pencil'}
-                        fnIconRight={() => setDisabled({ ...disabled, firstname: !disabled.firstname })}
+                        fnIconRight={() => setDisabled({ ...disabled, firstName: !disabled.firstName })}
                         style={inputBlackStyle}
                     />
 
                     <BasicInput
-                        value={userData.lastname}
-                        onChangeText={value => setUserData({ ...userData, lastname: value })}
-                        disabled={disabled.lastname}
+                        value={userData.lastName}
+                        onChangeText={value => setUserData({ ...userData, lastName: value })}
+                        disabled={disabled.lastName}
                         iconRight={'pencil'}
-                        fnIconRight={() => setDisabled({ ...disabled, lastname: !disabled.lastname })}
+                        fnIconRight={() => setDisabled({ ...disabled, lastName: !disabled.lastName })}
                         style={inputBlackStyle}
                     />
 

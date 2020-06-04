@@ -7,6 +7,7 @@ import styles from './index.style';
 import BasicHeader from '../../../UI/Header/BasicHeader';
 import _ from 'lodash';
 import {RouteProp} from "@react-navigation/native";
+import { SERVER, PORT, API_HEADERS} from "../../../constants";
 
 const profilePic = require('../../../assets/profilePic.jpg');
 
@@ -25,13 +26,9 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
 
     useEffect(() => {
         const getPlayers = async () => {
-            let response = await fetch('http://35.222.104.227:80/api/player/getPlayers', {
+            let response = await fetch('http://'+SERVER+':'+PORT+'/api/player/getPlayers', {
                 method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                }
+                headers: API_HEADERS
             });
             let data = await response.json();
             if(data.statusCode === 201){
@@ -51,16 +48,16 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
             <View style={styles.body}>
                 <ScrollView>
                     <List>
-                        {_.map(players, (player, key) => {
-                            // @ts-ignore
+                        {_.map(players, (player: {username, status}, key) => {
+                            const playerString = JSON.stringify(player);
                             if(player.status.online){
                                 console.log(user);
                                 console.log(player);
                                 return(
                                     <ListItem key={key} thumbnail
                                               onPress={() => navigation.navigate('ChatScreen',{
-                                                  userA: user,
-                                                  userB: JSON.stringify(player)
+                                                  userSender: user,
+                                                  userReceiver: playerString
                                               })}>
                                         <Left>
                                             <Thumbnail small source={profilePic} />
@@ -82,8 +79,8 @@ const PlayersScreen: React.FunctionComponent<FriendsScreenProps> = props => {
                                 return(
                                     <ListItem key={key} thumbnail
                                               onPress={() => navigation.navigate('ChatScreen',{
-                                                  userA: user,
-                                                  userB: JSON.stringify(player)
+                                                  userSender: user,
+                                                  userReceiver: playerString
                                               })}>
                                         <Left>
                                             <Thumbnail small source={profilePic} />

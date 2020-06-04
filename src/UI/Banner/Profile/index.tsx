@@ -4,6 +4,7 @@ import { Image, Text } from 'react-native';
 import styles from './index.style';
 
 const profilePic = require('../../../assets/profilePic.jpg');
+
 interface BannerProfileProps {
     userName: string;
     stars: string;

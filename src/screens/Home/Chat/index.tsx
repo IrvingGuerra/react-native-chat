@@ -8,7 +8,7 @@ import BasicHeader from '../../../UI/Header/BasicHeader';
 import BasicInput from "../../../UI/Input/BasicInput";
 import {RouteProp} from "@react-navigation/native";
 const profilePic = require('../../../assets/profilePic.jpg');
-import {Recieve, Send} from '../../../UI/Chat/Bubbles';
+import {BubbleReceived, BubbleSent} from '../../../UI/Chat/Bubbles';
 import Meteor, { createContainer, withTracker } from 'react-native-meteor';
 import _ from "lodash";
 import { inputBlackStyle } from '../../../UI/Input/BasicInput/index.style';
@@ -30,8 +30,8 @@ interface ChatScreenProps {
 
 const ChatScreen: React.FunctionComponent<ChatScreenProps> = props => {
     const { route, navigation, listReady, messages } = props;
-    const { userA, userB } = route.params;
-    const actualID = JSON.parse(userA)._id;
+    const { userSender, userReceiver } = route.params;
+    const actualID = JSON.parse(userSender)._id;
 
     const [chat, setChat] = useState<ChatData>({
         msn: '',
@@ -49,8 +49,8 @@ const ChatScreen: React.FunctionComponent<ChatScreenProps> = props => {
         if(chat.msn != ''){
             console.log("Enviando mensaje")
             const json = {
-                idSender: JSON.parse(userA)._id,
-                idReceiver: JSON.parse(userB)._id,
+                idSender: JSON.parse(userSender)._id,
+                idReceiver: JSON.parse(userReceiver)._id,
                 text: chat.msn,
                 date: currentLocalDate().toISOString(),
                 read: false,
@@ -77,21 +77,21 @@ const ChatScreen: React.FunctionComponent<ChatScreenProps> = props => {
                                 <Thumbnail small source={profilePic} />
                             </Left>
                             <Body>
-                                <Text>{JSON.parse(userB).username}</Text>
+                                <Text>{JSON.parse(userReceiver).username}</Text>
                                 <Text note>Ultima conexion: 3:20 pm</Text>
                             </Body>
                         </ListItem>
                     </List>
 
                     <View style={styles.chat}>
-                        {_.map(messages, (message, key) => {
+                        {_.map(messages, (message: {idSender, text}, key) => {
                             if(message.idSender === actualID){
                                 return(
-                                    <Send key={key} text={message.text}/>
+                                    <BubbleSent key={key} text={message.text}/>
                                 )
                             }else{
                                 return(
-                                    <Recieve key={key} text={message.text}/>
+                                    <BubbleReceived key={key} text={message.text}/>
                                 )
                             }
                         })}
@@ -116,9 +116,9 @@ const ChatScreen: React.FunctionComponent<ChatScreenProps> = props => {
 
 export default createContainer((props) => {
     const { route } = props;
-    const { userA, userB } = route.params;
-    const idA = JSON.parse(userA)._id;
-    const idB = JSON.parse(userB)._id;
+    const { userSender, userReceiver } = route.params;
+    const idA = JSON.parse(userSender)._id;
+    const idB = JSON.parse(userReceiver)._id;
     const handle = Meteor.subscribe('messagesPlayers', idA, idB);
     return {
         listReady: handle.ready(),

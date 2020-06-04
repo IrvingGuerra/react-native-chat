@@ -18,7 +18,7 @@ export type RootStackParamList = {
     HomeScreen: { user: string};
     ConfigurationScreen: { user: string};
     PlayersScreen: { user: string};
-    ChatScreen: { userA: string, userB: string,};
+    ChatScreen: { userSender: string, userReceiver: string,};
 };
 
 const Stack = createStackNavigator<RootStackParamList>();

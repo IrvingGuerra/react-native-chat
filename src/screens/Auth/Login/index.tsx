@@ -36,8 +36,8 @@ const LoginScreen: React.FunctionComponent<LoginScreenProps> = props => {
     });
 
     const [userData, setUserData] = useState<UserData>({
-        username: 'iguerra',
-        password: '123'
+        username: '',
+        password: ''
     });
 
     const switchPasswordHidden = () => {

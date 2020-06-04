@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
 
     arrowRight: {
         right:moderateScale(-6, 0.5),
+    },
+    text: {
+        paddingTop: 5, color: 'white'
     }
 });
 
